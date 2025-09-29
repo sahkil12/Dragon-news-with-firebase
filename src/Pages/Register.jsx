@@ -1,6 +1,26 @@
+import { use } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
+const { registerUser } = use(AuthContext)
+
+  const handleRegister= e =>{
+    e.preventDefault()
+    const name = e.target.name.value;
+    const photo = e.target.PhotoURL.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(name, photo, email, password);
+    // login with firebase data pass 
+    registerUser(email, password)
+    .then(result =>{
+      console.log(result);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
   return (
     <div className="flex justify-center min-h-screen items-center">
       <div className="card bg-base-100 w-full max-w-2xl p-7 shrink-0 shadow-lg">
@@ -9,7 +29,8 @@ const Register = () => {
         </h2>
         <div className="border my-3 border-gray-200 mx-auto w-10/12 "></div>
         <div className="card-body">
-          <form className="fieldset space-y-2">
+          {/* from start */}
+          <form onSubmit={handleRegister} className="fieldset space-y-2">
             <label className="label text-black text-lg font-medium">
               Your Name
             </label>
@@ -17,6 +38,7 @@ const Register = () => {
             <input
               type="text"
               className="input border-none px-6 w-full py-7 bg-base-300"
+              name="name"
               placeholder="Enter your name"
             />
             <label className="label text-black text-lg font-medium">
@@ -24,7 +46,7 @@ const Register = () => {
             </label>
             {/* Photo URL */}
             <input
-              type="text"
+              type="text"  name="PhotoURL"
               className="input border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your Photo URL"
             />
@@ -33,7 +55,7 @@ const Register = () => {
             </label>
             {/* email */}
             <input
-              type="email"
+              type="email" name="email"
               className="input border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your email address"
             />
@@ -42,7 +64,7 @@ const Register = () => {
             </label>
             {/* password */}
             <input
-              type="password"
+              type="password" name="password"
               className="input border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your password"
             />

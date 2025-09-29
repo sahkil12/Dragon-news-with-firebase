@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import user from "../assets/user.png";
 
 const Navbar = () => {
+
   return (
     <div className="flex gap-4  flex-col md:gap-1 items-center md:flex-row justify-between">
       <div></div>
