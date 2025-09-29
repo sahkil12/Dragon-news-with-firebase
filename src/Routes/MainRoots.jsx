@@ -1,33 +1,51 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomeLayouts from "../Layouts/HomeLayouts";
-import Home from "../Pages/Home";
-import About from "../Pages/About";
-import Career from "../Pages/Career";
-import CategoryNews from "../Pages/CategoryNews";
+import Home from './../Pages/Home';
+import CategoryNews from './../Pages/CategoryNews';
+import About from './../Pages/About';
+import Career from './../Pages/Career';
+import AuthLayout from "../Layouts/AuthLayout";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:HomeLayouts,
+   element:<HomeLayouts></HomeLayouts>,
     children:[
       {
         index: true,
-        Component:Home,
+        element:<Home></Home>
       },
       {
         path:'category/:id',
-        Component:CategoryNews,
+        element:<CategoryNews></CategoryNews> ,
         loader:()=>fetch('/news.json')
       },
       {
         path:'about',
-        Component:About,
+        element:<About></About>
       },
       {
         path:'career',
-        Component:Career,
+        element:<Career></Career>
       }
     ]
   },
+  {
+    path:'/auth',
+    element:<AuthLayout></AuthLayout>,
+    children:[
+      {
+        path:'/auth/login',
+        element:<Login></Login>
+      },
+      {
+        path:'/auth/register',
+        element:<Register></Register>
+      }
+    ]
+  }
   
 ]);
