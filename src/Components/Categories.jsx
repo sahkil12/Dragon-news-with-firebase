@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigation } from "react-router-dom";
+import Loader from "./Loader";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -8,6 +9,10 @@ const Categories = () => {
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);
+  const loader = useNavigation()
+    if(loader.state === 'loading'){
+        return <Loader></Loader>
+    }
   return (
     <div>
       <h2 className="font-semibold text-xl">All Category</h2>

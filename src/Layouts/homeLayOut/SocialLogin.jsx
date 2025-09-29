@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 const SocialLogin = () => {
   return (
     <div>
-      <h2 className="font-bold text-xl my-4">Login With</h2>
+      <h2 className="font-bold text-xl mb-4">Login With</h2>
       <div className="space-y-3">
         {/* google login */}
         <button className="btn py-6 w-full bg-white text-base border border-secondary text-secondary hover:bg-secondary hover:text-white">
