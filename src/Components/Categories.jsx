@@ -11,7 +11,7 @@ const Categories = () => {
   }, []);
   const loader = useNavigation()
     if(loader.state === 'loading'){
-        return <Loader></Loader>
+        return <Loader ></Loader>
     }
   return (
     <div>

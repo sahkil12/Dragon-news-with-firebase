@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import Marquee from "react-fast-marquee";
 import TitleContext from "../main";
-import Loader from "./Loader";
 
 const LatestNews = () => {
   const { newsTitle } = useContext(TitleContext);
   if(!newsTitle){
-    return <Loader></Loader>
+    return <p className="text-center font-semibold">Loading..</p>
   }
   const breakingTitle = newsTitle.filter(news=> news.others.is_today_pick)
   return (
