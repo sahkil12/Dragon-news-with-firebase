@@ -38,9 +38,10 @@ const Navbar = () => {
           Career
         </NavLink>
       </div>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         {/* login button */}
-        <img src={userPng} className="rounded-full" alt="" />
+        {user && <p className="font-bold text-xl text-secondary">{user.displayName}</p>}
+        <img src={user ? user.photoURL : userPng} className="rounded-full w-12 h-12 mx-3" alt="" />
         {user ? (
           <Link
             onClick={handleLogout}

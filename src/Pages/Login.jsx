@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { use, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -8,23 +8,23 @@ const Login = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [error, setError] = useState('')
+  const location = useLocation()
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
-    // login with firebase data pass
     setError('')
+
     loginUser(email, password)
       .then((result) => {
         console.log(result.user);
-        navigate("/");
+        navigate(`${location.state ? location.state : '/'}`);
       })
       .catch((error) => {
         console.log(error);
         setError(error.message)
       });
-      
   };
   return (
     <div className="flex justify-center min-h-screen items-center">
@@ -44,6 +44,7 @@ const Login = () => {
               name="email"
               className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your email address"
+              required
             />
             <label className="label text-black text-lg font-medium">
               Password
@@ -54,6 +55,7 @@ const Login = () => {
                 name="password"
                 className="input text-base border-none px-6 w-full py-7 bg-base-300"
                 placeholder="Enter your password"
+                required
               />
               <button
                 onClick={() => {

@@ -7,6 +7,7 @@ const NewsDetailsCard = ({ news }) => {
     thumbnail_url,
     details,
   } = news;
+  
   return (
     <div className="border m-1 p-6 rounded-xl border-gray-300 space-y-7">
         <img src={thumbnail_url} className="w-full h-[450px] object-cover rounded-md" alt="" />
