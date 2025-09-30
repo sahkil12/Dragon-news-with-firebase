@@ -7,20 +7,24 @@ const Login = () => {
   const { loginUser } = use(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [error, setError] = useState('')
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
     // login with firebase data pass
+    setError('')
     loginUser(email, password)
       .then((result) => {
-        console.log(result);
+        console.log(result.user);
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
+        setError(error.message)
       });
+      
   };
   return (
     <div className="flex justify-center min-h-screen items-center">
@@ -68,6 +72,7 @@ const Login = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
+            <p className="text-red-400 font-medium text-sm py-3">{error}</p>
             <button className="btn btn-neutral mt-4 py-6 bg-primary text-lg">
               Login
             </button>

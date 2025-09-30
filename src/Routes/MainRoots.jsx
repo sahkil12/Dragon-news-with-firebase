@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Link } from "react-router-dom";
 import HomeLayouts from "../Layouts/HomeLayouts";
 import Home from './../Pages/Home';
 import CategoryNews from './../Pages/CategoryNews';
@@ -7,7 +7,8 @@ import Career from './../Pages/Career';
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
-
+import Error from "../Pages/Errorpage/Error";
+import NewsDetails from "../Pages/NewsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ export const router = createBrowserRouter([
         element:<Register></Register>
       }
     ]
+  },
+  {
+    path:'news-details/:id',
+    element:<NewsDetails></NewsDetails>,
+  },
+  {
+    path:'/*',
+    element:<Error></Error>
   }
   
 ]);

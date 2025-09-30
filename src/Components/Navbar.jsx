@@ -44,7 +44,7 @@ const Navbar = () => {
         {user ? (
           <Link
             onClick={handleLogout}
-             to={"/auth/login"}
+             to={"/"}
             className=" btn py-2 font-medium px-8 text-white bg-primary"
           >
             {" "}

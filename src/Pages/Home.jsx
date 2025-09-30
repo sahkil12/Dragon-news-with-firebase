@@ -7,7 +7,7 @@ const Home = () => {
         return <Loader></Loader>
     }
     return (
-       <Navigate to={'/category/1'}></Navigate>
+       <Navigate to={'/category/0'}></Navigate>
     );
 };
 

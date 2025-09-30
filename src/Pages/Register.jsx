@@ -31,6 +31,7 @@ const [show, setShow] = useState(false)
     setError("Password must contain at least one special character like (@ # $ % & * !).");
     return false;
   }
+  setError('')
     // login with firebase data pass 
     registerUser(email, password)
     .then(result =>{
@@ -39,10 +40,10 @@ const [show, setShow] = useState(false)
     })
     .catch(error =>{
       console.log(error);
-      setError(error)
+      setError(error.message)
     })
   }
-  console.log(error);
+  
   return (
     <div className="flex justify-center min-h-screen items-center">
       <div className="card bg-base-100 w-full max-w-2xl p-7 shrink-0 shadow-lg">
@@ -100,6 +101,7 @@ const [show, setShow] = useState(false)
              <span className="text-sm mx-1">Accept Term & Conditions</span>
             </label>
             {/* register button */}
+             <p className="text-red-400 font-medium text-sm py-3">{error}</p>
             <button className="btn btn-neutral mt-4 py-6 bg-primary text-lg">
               Register
             </button>

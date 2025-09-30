@@ -3,6 +3,7 @@ import { FaEye, FaStar, FaRegBookmark, FaShareAlt } from "react-icons/fa";
 
 const NewsCard = ({ news }) => {
   const {
+    id,
     title,
     author,
     thumbnail_url,
@@ -50,7 +51,7 @@ const NewsCard = ({ news }) => {
         {details.length > 200 ? (
           <>
             {details.slice(0, 200)}…
-            <Link className="text-blue-600 ml-1 hover:underline">
+            <Link to={`/news-details/${id}`} className="text-blue-600 ml-1 hover:underline">
               Read More
             </Link>
           </>

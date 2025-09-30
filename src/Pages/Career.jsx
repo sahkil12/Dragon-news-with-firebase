@@ -1,9 +1,13 @@
+import { Navigate, useNavigation } from "react-router-dom";
+import Loader from './../Components/Loader';
 
 const Career = () => {
+    const loader = useNavigation()
+    if(loader.state === 'loading'){
+        return <Loader></Loader>
+    }
     return (
-        <div>
-              <h2 className='text-4xl text-center'>Career Section</h2>
-        </div>
+       <Navigate to={'/category/2'}></Navigate>
     );
 };
 
