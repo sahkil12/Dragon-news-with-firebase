@@ -1,10 +1,13 @@
-import { use } from "react";
-import { Link } from "react-router-dom";
+import { use, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const Register = () => {
 const { registerUser } = use(AuthContext)
-
+const [error, setError] = useState('')
+const [show, setShow] = useState(false)
+ const navigate = useNavigate()
   const handleRegister= e =>{
     e.preventDefault()
     const name = e.target.name.value;
@@ -12,15 +15,34 @@ const { registerUser } = use(AuthContext)
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, photo, email, password);
+    const lengthCheck = /^.{8,}$/;
+  const numberCheck = /.*\d.*/;
+  const specialCheck = /.*[@#$%&*!].*/;
+  // password validate--
+  if (!lengthCheck.test(password)) {
+    setError("Password must be at least 8 characters or longer.");
+    return false;
+  }
+  if (!numberCheck.test(password)) {
+    setError("Password must contain at least one number.");
+    return false;
+  }
+  if (!specialCheck.test(password)) {
+    setError("Password must contain at least one special character like (@ # $ % & * !).");
+    return false;
+  }
     // login with firebase data pass 
     registerUser(email, password)
     .then(result =>{
       console.log(result);
+      navigate('/')
     })
     .catch(error =>{
       console.log(error);
+      setError(error)
     })
   }
+  console.log(error);
   return (
     <div className="flex justify-center min-h-screen items-center">
       <div className="card bg-base-100 w-full max-w-2xl p-7 shrink-0 shadow-lg">
@@ -37,7 +59,7 @@ const { registerUser } = use(AuthContext)
             {/* name */}
             <input
               type="text"
-              className="input border-none px-6 w-full py-7 bg-base-300"
+              className="input text-base border-none px-6 w-full py-7 bg-base-300"
               name="name"
               placeholder="Enter your name"
             />
@@ -47,7 +69,7 @@ const { registerUser } = use(AuthContext)
             {/* Photo URL */}
             <input
               type="text"  name="PhotoURL"
-              className="input border-none px-6 w-full py-7 bg-base-300"
+              className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your Photo URL"
             />
             <label className="label text-black text-lg font-medium">
@@ -56,18 +78,22 @@ const { registerUser } = use(AuthContext)
             {/* email */}
             <input
               type="email" name="email"
-              className="input border-none px-6 w-full py-7 bg-base-300"
+              className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your email address"
             />
             <label className="label text-black text-lg font-medium">
               Password
             </label>
             {/* password */}
-            <input
-              type="password" name="password"
-              className="input border-none px-6 w-full py-7 bg-base-300"
+            <div className="relative">
+              <input
+              type={show ? "text":"password"}
+              name="password"
+              className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your password"
             />
+            <button onClick={()=>{setShow(!show)}} type="button" className="absolute right-3 top-4">{show ? <IoEyeOff className="text-neutral-700" size={24}></IoEyeOff> :  <IoEye className="text-neutral-700" size={24}></IoEye > }</button>
+            </div>
             {/* term and condition */}
             <label className="label my-3">
               <input type="checkbox"  className="checkbox " />

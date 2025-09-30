@@ -1,11 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
-import user from "../assets/user.png";
+import userPng from "../assets/user.png";
+import { use } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
-
+  const { user, signoutUser } = use(AuthContext);
+  const handleLogout = () => {
+    signoutUser();
+  };
   return (
     <div className="flex gap-4  flex-col md:gap-1 items-center md:flex-row justify-between">
-      <div></div>
+      <div>{(user && <p>{user.email}</p>) || <p>{user?.displayName}</p>}</div>
       {/* nav section */}
       <div className="nav flex gap-6 text-lg text-accent">
         <NavLink
@@ -35,8 +40,25 @@ const Navbar = () => {
       </div>
       <div className="flex gap-3">
         {/* login button */}
-        <img src={user} className="rounded-full" alt="" />
-        <Link to={"/auth/login"}  className=" btn py-2 font-medium px-8 text-white bg-primary"> Login </Link>
+        <img src={userPng} className="rounded-full" alt="" />
+        {user ? (
+          <Link
+            onClick={handleLogout}
+             to={"/auth/login"}
+            className=" btn py-2 font-medium px-8 text-white bg-primary"
+          >
+            {" "}
+            Logout{" "}
+          </Link>
+        ) : (
+          <Link
+            to={"/auth/login"}
+            className=" btn py-2 font-medium px-8 text-white bg-primary"
+          >
+            {" "}
+            Login{" "}
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -1,22 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import { use } from "react";
+import { use, useState } from "react";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
-  const { loginUser } = use(AuthContext)
+  const { loginUser } = use(AuthContext);
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
-    // login with firebase data pass 
+    // login with firebase data pass
     loginUser(email, password)
-    .then(result =>{
-      console.log(result);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="flex justify-center min-h-screen items-center">
@@ -32,18 +36,35 @@ const Login = () => {
               Email address
             </label>
             <input
-              type="email" name="email"
-              className="input border-none px-6 w-full py-7 bg-base-300"
+              type="email"
+              name="email"
+              className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your email address"
             />
             <label className="label text-black text-lg font-medium">
               Password
             </label>
-            <input
-              type="password" name="password"
-              className="input border-none px-6 w-full py-7 bg-base-300"
-              placeholder="Enter your password"
-            />
+            <div className="relative">
+              <input
+                type={show ? "text" : "password"}
+                name="password"
+                className="input text-base border-none px-6 w-full py-7 bg-base-300"
+                placeholder="Enter your password"
+              />
+              <button
+                onClick={() => {
+                  setShow(!show);
+                }}
+                type="button"
+                className="absolute right-3 top-4"
+              >
+                {show ? (
+                  <IoEyeOff className="text-neutral-700" size={24}></IoEyeOff>
+                ) : (
+                  <IoEye className="text-neutral-700" size={24}></IoEye>
+                )}
+              </button>
+            </div>
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
