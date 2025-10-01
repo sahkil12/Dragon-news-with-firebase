@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-console.log("API KEY:", import.meta.env.VITE_apiKey);
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use

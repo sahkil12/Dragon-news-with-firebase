@@ -1,15 +1,26 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import { use, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
-  const { loginUser } = use(AuthContext);
+  const { loginUser, forgetPassword } = useContext(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [error, setError] = useState('')
   const location = useLocation()
+  const emailRef = useRef()
 
+  const handleForgetPassword =()=>{
+   const email = emailRef.current.value;
+   forgetPassword(email)
+   .then(()=>{
+    alert('Please check your Inbox or Spam folder. A password reset email has been sent!')
+   })
+   .catch(error =>{
+    setError(error.message)
+   })
+  }
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -18,11 +29,9 @@ const Login = () => {
 
     loginUser(email, password)
       .then((result) => {
-        console.log(result.user);
         navigate(`${location.state ? location.state : '/'}`);
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message)
       });
   };
@@ -42,6 +51,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              ref={emailRef}
               className="input text-base border-none px-6 w-full py-7 bg-base-300"
               placeholder="Enter your email address"
               required
@@ -71,7 +81,7 @@ const Login = () => {
                 )}
               </button>
             </div>
-            <div>
+            <div onClick={handleForgetPassword}>
               <a className="link link-hover">Forgot password?</a>
             </div>
             <p className="text-red-400 font-medium text-sm py-3">{error}</p>

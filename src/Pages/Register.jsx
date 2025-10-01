@@ -52,19 +52,17 @@ const Register = () => {
     registerUser(email, password)
       .then((result) => {
         const users = result.user;
-        console.log(users);
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({...users, displayName: name, photoURL: photo});
+            navigate("/");
           })
           .catch((error) => {
-            console.log(error)
             setUser(users)
             navigate("/");
           });
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
       });
   };
