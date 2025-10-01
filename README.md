@@ -1,16 +1,26 @@
-# React + Vite
+# Dragon News Router
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Live link - [(https://dragon-news-code-a9ba5.web.app/category/1)]
 
-Currently, two official plugins are available:
+## Website Future --
+1. Login and register system with email and pass!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Social login system with google and github!
 
-## React Compiler
+3. Private route function -- if user not login or don't have an account then user not see and didn't visit some specific page or route.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+4. forget password with sending email system added!
 
-## Expanding the ESLint configuration
+5. Implement password regex system and some validation this are made website more secure and safe to use !
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+6. Dragon news code this site is user friendly ! user feel safe to use and emjoy and comfortable to use this site.
+
+## Resource For Website --
+
+  ## tailwindcss/vite
+  ##  daisyui
+  ## (New)- date-fn --- for make or show time, day, year, month live -[(https://date-fns.org/)]
+  ## firebase - for user authentication and deploy live site
+  ## (New)- react-fast-marque - for text slide in side anywhere smooth or beautifully -[(https://www.npmjs.com/package/react-fast-marquee)]
+  ## react-icon - for ant icon in website - 
+  ## react-spinners -- for loader 
